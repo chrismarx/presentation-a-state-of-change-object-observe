@@ -15,7 +15,8 @@ var pkg = require('./package.json'),
   opn = require('opn'),
   ghpages = require('gh-pages'),
   path = require('path'),
-  isDist = process.argv.indexOf('serve') === -1;
+  isDist = process.argv.indexOf('serve') === -1,
+  replace = require('gulp-replace');
 
 gulp.task('js', ['clean:js'], function() {
   return gulp.src('src/scripts/main.js')
@@ -82,13 +83,21 @@ gulp.task('clean:images', function() {
     .pipe(rimraf());
 });
 
+//replace values for deployment
+gulp.task('findAndReplace', ['html'], function() {
+  return gulp.src('dist/index.html')
+    .pipe(replace(/http\:\/\/localhost\:8080/g, 'http://cm325.github.io'))
+    .pipe(gulp.dest('dist'))
+});
+
 gulp.task('connect', ['build'], function(done) {
   connect.server({
     root: 'dist',
+    port: 9090,
     livereload: true
   });
 
-  opn('http://localhost:8080', done);
+  opn('http://localhost:9090', done);
 });
 
 gulp.task('watch', function() {
@@ -101,10 +110,11 @@ gulp.task('watch', function() {
   ], ['js']);
 });
 
-gulp.task('deploy', ['build'], function(done) {
-  ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log, message: 'Updates --skip-ci' }, done);
+gulp.task('deploy', ['build','findAndReplace'], function(done) {
+  //ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log, message: 'Updates --skip-ci' }, done);
 });
 
 gulp.task('build', ['js', 'html', 'css', 'images']);
 gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['build']);
+

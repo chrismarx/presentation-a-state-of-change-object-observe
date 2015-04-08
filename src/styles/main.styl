@@ -16,9 +16,14 @@ h1.name
   font-size: 1.3em
   margin: 0
 
+.angular-shield
+  background-image: url('../images/angularjs-shield.png');
+  background-repeat: no-repeat;
+  background-size: 150px;
+
 .avatar
   filter: grayscale(30%)
-  width: 120px
+  width: 140px
   height: @width
   border-radius: 100%
   margin: .5em 0
@@ -40,6 +45,16 @@ pre, code
       opacity: 0.4
     &.bespoke-backdrop-before
       transition-delay: 2s
+  &--angrycat
+    background-image: url('../images/angry-cat.jpg')
+    background-position: 50% 34%
+    &.bespoke-backdrop-active
+      opacity: 0.55
+  &--nintieswebsite
+    background-image: url('../images/90s-website.gif')
+    background-position: 50% 34%
+    &.bespoke-backdrop-active
+      opacity: 0.55    
   &--lightning
     background-image: url('../images/lightning.gif')
     &.bespoke-backdrop-active
@@ -56,6 +71,17 @@ pre, code
     background-repeat: no-repeat
     &.bespoke-backdrop-active
       opacity: 0.15
+  &--jquery
+    background-color: white
+    background-image: url('../images/JQuery-Logo.svg')
+    background-size: 30%
+    background-repeat: no-repeat
+    &.bespoke-backdrop-active
+      opacity: 0.15      
+    &.bespoke-backdrop-after
+      transition-delay: 0s
+    &.bespoke-backdrop-before
+      transition-delay: 2s
   &--angularjs
     background-color: white
     background-image: url('../images/angularjs.png')
@@ -70,6 +96,20 @@ pre, code
       transition-delay: 2s
   &--chrome
     background-image: url('../images/chrome.jpg')
+  &--whousesangular
+    background-image: url('../images/who-uses-angular.png') 
+    &.bespoke-backdrop-active
+      opacity: 1
+    background-size:100% 100%
+    transition:none 
+  &--angularadoption
+    background-image: url('../images/angular-adoption.png') 
+    &.bespoke-backdrop-active
+      opacity: 1
+    background-size:80% 80%
+    background-repeat:no-repeat
+    background-color:#EDECEC
+    
   &--clojure
     background-image: url('../images/clojure.jpg')
     &.bespoke-backdrop-active
@@ -124,6 +164,10 @@ pre, code
   h1
     border-color: currentColor
 
+.light-grey
+  h1,h2,h3
+    color:black
+
 .bullet.expand
   transition: all 2s ease
   opacity: 0
@@ -139,3 +183,38 @@ pre, code
   &.bespoke-bullet-active
     opacity: 1
     max-width: 500px
+
+.meme-impact
+  font-size: 1.9em
+  font-family: Impact, Charcoal, sans-serif
+  color:white 
+  text-shadow: -1px 0 black, 0 1px black, 2px 0 black, 0 -1px black
+  letter-spacing:0px
+
+.marquee 
+  width: 110%;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  color:white;
+
+.marquee span
+    display: inline-block;
+    padding-left: 130%;  
+    animation: marquee 15s linear infinite;
+
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+.footer-reference {
+  position:fixed;
+  bottom:0px;
+  width:100%
+  height:30px;
+  color:#ADD809
+  left:0px
+  font-size:.8em
+}
