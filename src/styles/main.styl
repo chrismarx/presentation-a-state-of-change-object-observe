@@ -103,6 +103,17 @@ pre, code
     background-image: url('../images/lightning.gif')
     &.bespoke-backdrop-active
       opacity: 0.75
+
+  &--crashtest
+    background-image: url('../images/crashtest.gif')
+    &.bespoke-backdrop-active
+      opacity: 1
+
+  &--neverending
+    background-image: url('../images/neverending.gif')
+    &.bespoke-backdrop-active
+      opacity: 1
+      
   &--poisonapple
     background-image: url('../images/poisonapple.gif')
     background-position: 50% 80%
@@ -303,4 +314,9 @@ pre, code
 
 .no-italics * {
   font-style:normal
+}
+
+.gist {
+  text-align: left;
+  overflow: scroll;
 }

@@ -30,10 +30,6 @@ html
         h3 Build maintainable, testable, and modular applications 
         h2 faster
 
-      +slide("misko")
-        h3 &ldquo;There's a lot of Web frameworks out there. What's unique about Angular is ... we have dependency injection, which is very unique. Nobody else has that. The thing that really hits it home is that we have directives. Rather than writing everything inside of JavaScript and then having a bunch of templates to generate the UI, you write a lot of it in HTML and HTML drives the assembly of the application. It's kind of the reverse thing. It's very unique&rdquo;
-        h4 -Misko Hevery, Angular creator
-
       +slide('jquery')
         h3 Why do we need frameworks?
         pre.language-javascript
@@ -70,7 +66,8 @@ html
 
       +slide  
         iframe(src="http://todomvc.com/" style="width:100%; height:100%;")
-        
+        p http://todomvc.com
+
       //Controlling complexity is the essence of computer programming. - Brian Kernighan
       +slide    
         iframe(src="http://blog.coderstats.net/todomvc-complexity/" style="width:100%; height:100%;")
@@ -110,8 +107,17 @@ html
           p(style="text-align:left") ref:
             a(href="http://stackoverflow.com/research/developer-survey-2015?utm_medium=social&utm_campaign=stack-overflow-survey&utm_source=facebook.com#tech-lang") http://stackoverflow.com/research/developer-survey-2015?utm_medium=social&utm_campaign=stack-overflow-survey&utm_source=facebook.com#tech-lang
   
-      +slide
-        h2. and of course we're using it at the lab, yardmap, all about bird biology
+      +slide  
+        h2. yardmap.org
+        iframe(src="http://app.yardmap.org" style="width:100%; height:100%;")
+
+      +slide  
+        h2. all about bird biology
+        iframe(src="http://biology.allaboutbirds.org/features/fancymales/fancy-males" style="width:100%; height:100%;")
+        p
+          a(href="http://biology.allaboutbirds.org/features/fancymales/fancy-males") http://biology.allaboutbirds.org/features/fancymales/fancy-males
+
+
 
       +slide
         img(src="images/todomvc.svg" height="35" style="position:absolute;")
@@ -120,7 +126,7 @@ html
       +slide()
         h1 Learning Angular
         h3 Controllers, $scope, partials/templates
-        h3 Services, Factories, Providers
+        h3 Services, Factories, $resource
         h3 Directives, Transclusion
         h3 Dependency Injection
         h3 Modules
@@ -143,334 +149,121 @@ html
       +slide('whoa')
         h2 WHOA
 
+      +slide("nintieswebsite")
+          p.marquee
+            span(style="font-size:2.5em;") Repeat after me. Unobstrusive Javascript. Unobstrusive Javascript  
+
       +slide  
         iframe(src="https://angularjs.org/#the-basics" style="width:100%; height:100%;")
 
-              
       +slide('angularjs')
-        h2 Dirty checking
-        h3 &mdash; a.k.a. $scope.$digest( ) &mdash;
-
-      
-      +slide
-        h2.single-words No idea it changed
-
-      +slide
-      h1 Solutions?  
-      h2 Cover the common solutions? backbone, emberjs, react?
-      h2 Mostly all trying to do the same thing. 
-      h2 Cut down on code with a framework to handle common tasks
-
-
-      +slide('backbonejs')
         pre.language-javascript
           code.
-            var model = new Model();
+            todomvc.controller('TodoCtrl', 
+                function TodoCtrl($scope, $location, $filter, todoStorage) {
+                var todos = $scope.todos = todoStorage.get(); 
 
-            model.set('foo', 'bar');
-            model.get('foo');
+                $scope.newTodo = '';
+                $scope.remainingCount = 
+                $filter('filter')(todos, {completed: false}).length;
 
-      +slide('jquery')
-        pre.language-javascript
-          code.
-            var model = new Model();
-
-            model.set('foo', 'bar');
-            model.get('foo');
-
-      //angular quote
-      +slide
-        h3(style='width:490px') &ldquo;Angular models are plain old JavaScript objects. This makes your code easy to test, maintain, reuse, and again free from boilerplate.&rdquo;
-
-      +slide
-        h1 Object.observe
-
-      +slide
-        pre.language-javascript
-          code.
-            // Add a property
-            o.foo = 'bar';
-
-            // Change record:
-            [{ name: "foo",
-               object: o,
-               type: "add" }]
-      +slide
-        pre.language-javascript
-          code.
-            // Update a property:
-            o.foo = 123;
-
-            // Change record
-            [{ name: "foo",
-               object: o,
-               oldValue: "bar",
-               type: "update" }]
-      +slide
-        pre.language-javascript
-          code.
-            delete o.foo;
-
-            // Change record:
-            [{ name: "foo",
-               object: o,
-               oldValue: 123,
-               type: "delete" }]
-
-      +slide
-        pre.language-javascript
-          code.
-            var a = [];
-
-            Array.observe(a, function(changes) {
-              console.log(changes);
-            });
-      +slide
-        pre.language-javascript
-          code.
-            a.push(1);
-
-            // Change record:
-            [{ addedCount: 1,
-               index: 0,
-               object: a,
-               removed: [],
-               type: "splice" }]
-
-      +slide
-        h2.single-words Synthetic change events
-
-      +slide
-        pre.language-javascript
-          code.
-            Object.getNotifier(o).notify({
-              type: 'update',
-              name: 'foo',
-              oldValue: 'bar'
-            });
-
-      +slide
-        h2 Binding<br><br><br>plain old data<br><br><br>to the<br><br><br>DOM
-
-      +slide('chrome')
-        h3 Available now in
-        h2 Chrome Stable
-
-      +slide
-        h2.single-words Seems uncontroversial enough
-
-      +slide('still lightning')
-        h2 Dissent
-        h3 &mdash; is &mdash;
-        h2 brewing
-
-      +slide
-        h2 Mutability
-        h3 &mdash; vs. &mdash;
-        h2 Immutability
-
-      +slide
-        h1 Immutable<br>values
-
-      +slide
-        pre.language-javascript
-          code.
-            // 'hello' is immutable
-            var str = 'hello';
-
-            str.replace('hello', 'goodbye');
-            str.slice(2);
-            str.concat(' there');
-
-            str; // still equals 'hello'
-
-      +slide
-        h2 Simple comparisons
-        pre.language-javascript
-          code.
-            'hello' === 'hello';
-
-      +slide
-        h3 We&rsquo;ve been treating
-        h2 arrays
-        h3 &mdash; like they&rsquo;re &mdash;
-        h2 immutable
+      +slide  
+        <script src="https://gist.github.com/cm325/00dc35123f98968a210c.js"></script>
 
       +slide
         pre.small.language-javascript
           code.
-            // Old and scary:
+            todomvc.factory('todoStorage', function () {
+              var STORAGE_ID = 'todos-angularjs-perf';
 
-            var nums = [1,2,3,4,5];
-
-            for (var i = 0; i &lt; nums.length; i++) {
-              // Cube all numbers
-              nums[i] = nums[i] * nums[i] * nums[i];
-
-              // Remove uneven items
-              if (nums[i] % 2 !== 0) {
-                nums.splice(i, 1);
-                i--;
-              }
-            }
+              return {
+                get: function () {
+                  return JSON.parse(localStorage.getItem(STORAGE_ID)
+                                       || '[]');
+                },
+                put: function (todos) {
+                  localStorage.setItem(STORAGE_ID, 
+                                          JSON.stringify(todos));
+                },
+                clear: function(){
+                  localStorage.setItem(STORAGE_ID, []);
+                }
+              };
+            });
 
       +slide
-        pre.language-javascript
+        pre.bullet.small.language-javascript
           code.
-            // New and simple:
-
-            var nums = [1,2,3,4,5]
-              .map(x => x * x * x)
-              .filter(x => x % 2 == 0);
-
-      +slide
-        h2 Every map, filter
-        h3 &mdash; results in a &mdash;
-        h2 New array
-
-      +slide
-        pre.language-javascript
+            todomvc.factory('todoStorage', function () {
+              return $resource('http://www.myapp.com/api/todos/:todoId'); 
+            });
+        pre.bullet.language-javascript
           code.
-            // Unfortunately,
-            // not actually immutable :(
-
-            nums.push(123);
-
-      +slide
-        h2 No simple comparisons
-        pre.language-javascript
+            //GET request to http://www.myapp.com/api/todos/123
+            var todo = todoStorage.get({todoId:123}); 
+        pre.bullet.language-javascript
           code.
-            assert([1,2,3] !== [1,2,3]);
+            //POST request to http://www.myapp.com/api/todos/123
+            todoStorage.save({todoId:123}, todo); 
 
-      +slide
-        h2 Cleaner code
-        h3 &mdash; with &mdash;
-        h2 Fewer bugs
+      +slide("misko")
+        h3 &ldquo;What's unique about Angular is ... we have dependency injection, which is very unique. Nobody else has that. <br/> But, the thing that really hits it home is that we have directives. Rather than writing everything inside of JavaScript and then having a bunch of templates to generate the UI, you write a lot of it in HTML and HTML drives the assembly of the application. It's kind of the reverse thing. It's very unique&rdquo;
+        h4 -Misko Hevery, Angular creator
 
-      +slide
-        h2.single-words Why are objects different?
+      +slide()
+        pre.bullet.small(style="line-height:10px;")
+          <span style="color: #f92672">&lt;ng</span><span style="color: #a6e22e">-pluralize</span> <span style="color: #a6e22e">count=</span><span style="color: #e6db74">&quot;remainingCount&quot;</span>
+          <br/>
+          <span style="color: #a6e22e">when=</span><span style="color: #e6db74">&quot;{ one: &#39;item left&#39;, other: &#39;items left&#39; }&quot;</span><span style="color: #f92672">&gt;</span>
+          <br/>
+          <span style="color: #960050; background-color: #1e0010">&lt;</span>/ng-pluralize&gt;
+        pre.bullet.small(style="color:white;")
+          <span>becomes</span>
+          <br/>
+          <span style="color: #f92672">&lt;span&gt;</span>items left<span style="color: #f92672">&lt;/span&gt;</span>
 
-      +slide
-        h2 What if every change
-        h3 &mdash; resulted in a &mdash;
-        h2 new object?
-
-      +slide('swannodette')
-        h4 David Nolen
-        br
-        h1 Mori
-        br
-        h4 Via ClojureScript
-
-      +slide
-        pre.language-javascript
+      +slide()
+        pre.small.language-javascript
           code.
-            // Create:
-            var map1 = mori.hash_map('foo', 1);
+            angular.module('todomvc', [])
+             .directive('todoList', function(){
+                return {
+                  restrict: 'E',
+                  transclude: true,
+                  scope: { title:'@' },
+                  template: "/partials/todo-list-partial.html"
+                  controller: "TodoCtrl"
+                };
+            })
+      
+      +slide("neverending")
+        p.bullet(style="margin-top:-380px;color:white") 
+          &lt;todo-list&gt;My Todo List&lt;/todo-list&gt;
+        <br/>
+        h2.bullet(style="color:white;")
+          'DIRECTIVES'&#33;
 
-            // Update:
-            var map2 = mori.conj(m, mori.vector('bar', 2));
-
-            // Returns a new hash map:
-            { 'foo': 1, 'bar': 2 }
-
-      +slide('leebyron')
-        h4 Lee Byron
-        br
-        h1 Immutable-js
-        br
-        h4 Facebook
-
-      +slide
-        pre.language-javascript
-          code.
-            // Create:
-            var map1 = Immutable.Map({ foo: 1 });
-
-            // Update:
-            var map2 = map1.merge({ bar: 2 });
-
-            // Returns a new map:
-            { "foo": 1, "bar": 2 }
-
-      +slide
-        h2 Simple comparisons!
-        pre.language-javascript
-          code.
-            var map1 = Immutable.Map({ foo: 'bar' });
-            var map2 = map1.merge({ foo: 'bar' });
-
-            assert(map1 === map2); // :D !!!
-
-      +slide
-        pre.language-javascript
-          code.
-            var map1 = Immutable.Map({ foo: 'bar' });
-            var map2 = Immutable.Map({ foo: 'bar' });
-
-            assert(Immutable.is(map1, map2));
-
-      +slide
-        h2 Is this redundant
-        h3 &mdash; when we have &mdash;
-        h2 Stateful DOM?
-
-      +slide
-        h1 React
-
-      +slide
-        h3(style='width:440px') &ldquo;Simply express how your app should look at any given point in time, and React will automatically manage all UI updates&rdquo;
-
-      +slide
-        h2.single-words Essentially stateless DOM
-
-      +slide('mattesch')
-        h4 Matt Esch
-        br
-        h1 virtual-dom
-        br
-        h4 Inspired by React
-
-      +slide
-        h2.single-words What&rsquo;s the big deal?
-
-      +slide('swannodette')
-        h4 David Nolen
-        br
-        h1 Om
-        br
-        h4 React + ClojureScript
-
-      +slide
-        h2 Entire UI state
-        h3 &mdash; in a &mdash;
-        h2 Single, immutable object
-
-      +slide
-        h2 &ldquo;The future
-        h3 &mdash; of &mdash;
-        h2 JavaScript MVCs&rdquo;
+      +slide('still crashtest')
+        h2(style="color:white;") You Said Testing
 
 
-      +slide('yellow')
-        h1 ES7
-
-      +slide('still poisonapple')
-        h3 &mdash; Is Object.observe &mdash;
-        h2 What we want
-        h3 &mdash; rather than &mdash;
-        h2 What we need?
+      +slide('still lightning')
+        h2 Angular 2.0
+        h3 &mdash; is &mdash;
+        h2 coming
 
 
-      +slide
-        a(href='https://cm325.github.io/todomvc/examples/anuglarjs-perf/')
-          h2 References
+      //+slide
+      //  h2 References
+      //    a(href='https://cm325.github.io/todomvc/examples/anuglarjs-perf/')
+       //   h2 TodoMvc examples
+      //    a(href="https://www.airpair.com/js/javascript-framework-comparison") mvc framework comparisons
 
       +slide
         img.avatar(src='images/utah.jpg')
         br
         h2 Thanks
-        a(href='http://cm325.github.io/astateofchange', style='border:none')
-          h3 bit.ly/astateofchange
+        a(href='bit.ly/1GOCHz1', style='border:none')
+          h3 bit.ly/1GOCHz1
 
     script(src='build/build.js')

@@ -86,7 +86,7 @@ gulp.task('clean:images', function() {
 //replace values for deployment
 gulp.task('findAndReplace', ['html'], function() {
   return gulp.src('dist/index.html')
-    .pipe(replace(/http\:\/\/localhost\:8080/g, 'http://cm325.github.io'))
+    .pipe(replace(/http\:\/\/localhost\:8080/g, 'http://cm325.github.io/todomvc/examples/angularjs-perf'))
     .pipe(gulp.dest('dist'))
 });
 
@@ -111,7 +111,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('deploy', ['build','findAndReplace'], function(done) {
-  //ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log, message: 'Updates --skip-ci' }, done);
+  ghpages.publish(path.join(__dirname, 'dist'), { logger: gutil.log, message: 'Updates --skip-ci' }, done);
 });
 
 gulp.task('build', ['js', 'html', 'css', 'images']);
