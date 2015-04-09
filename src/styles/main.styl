@@ -45,6 +45,37 @@ pre, code
       opacity: 0.4
     &.bespoke-backdrop-before
       transition-delay: 2s
+
+  &--misko
+    background-image: url('../images/misko.jpg')
+    transform-origin: 50% 40%
+    &.bespoke-backdrop-active
+      opacity: 0.25
+
+  &--jqueryaccordion
+    background-image: url('../images/jquery-accordion.gif')
+    background-position: 0 0
+    &.bespoke-backdrop-active
+      opacity: 0.4
+    &.bespoke-backdrop-before
+      transition-delay: 2s
+          
+  &--urkel
+    background-image: url('../images/urkel.gif')
+    background-position: 0 0
+    &.bespoke-backdrop-active
+      opacity: 1
+    &.bespoke-backdrop-before
+      transition-delay: 2s
+
+  &--barkley
+    background-image: url('../images/barkley.gif')
+    background-position: 0 0
+    &.bespoke-backdrop-active
+      opacity: 1
+    &.bespoke-backdrop-before
+      transition-delay: 2s    
+              
   &--angrycat
     background-image: url('../images/angry-cat.jpg')
     background-position: 50% 34%
@@ -55,6 +86,19 @@ pre, code
     background-position: 50% 34%
     &.bespoke-backdrop-active
       opacity: 0.55    
+  
+  &--seinfeld
+    background-image: url('../images/seinfeld.gif')
+    background-position: 50% 80%
+    &.bespoke-backdrop-active
+      opacity: 1
+  
+  &--whoa
+    background-image: url('../images/whoa.gif')
+    background-position: 50% 80%
+    &.bespoke-backdrop-active
+      opacity: 1
+
   &--lightning
     background-image: url('../images/lightning.gif')
     &.bespoke-backdrop-active
@@ -102,6 +146,7 @@ pre, code
       opacity: 1
     background-size:100% 100%
     transition:none 
+
   &--angularadoption
     background-image: url('../images/angular-adoption.png') 
     &.bespoke-backdrop-active
@@ -109,7 +154,34 @@ pre, code
     background-size:80% 80%
     background-repeat:no-repeat
     background-color:#EDECEC
-    
+
+  &--angularadoption2
+    background-image: url('../images/angular-adoption2.png') 
+    &.bespoke-backdrop-active
+      opacity: 1
+    background-size:80% 80%
+    background-repeat:no-repeat
+    background-color:white
+    transition:none
+
+  &--angularadoption3
+    background-image: url('../images/angular-adoption3.png') 
+    &.bespoke-backdrop-active
+      opacity: 1
+    background-size:80% 80%
+    background-repeat:no-repeat
+    background-color:white
+    transition:none
+
+  &--angularadoption4
+    background-image: url('../images/angular-adoption4.png') 
+    &.bespoke-backdrop-active
+      opacity: 1
+    background-size:65% 80%
+    background-repeat:no-repeat
+    background-color:white
+    transition:none  
+
   &--clojure
     background-image: url('../images/clojure.jpg')
     &.bespoke-backdrop-active
@@ -168,6 +240,10 @@ pre, code
   h1,h2,h3
     color:black
 
+.red
+  h1,h2,h3
+    color:red
+
 .bullet.expand
   transition: all 2s ease
   opacity: 0
@@ -185,6 +261,8 @@ pre, code
     max-width: 500px
 
 .meme-impact
+  position:fixed
+  left:50%
   font-size: 1.9em
   font-family: Impact, Charcoal, sans-serif
   color:white 
@@ -217,4 +295,12 @@ pre, code
   color:#ADD809
   left:0px
   font-size:.8em
+}
+
+.bold * {
+  font-weight:bold
+}
+
+.no-italics * {
+  font-style:normal
 }
