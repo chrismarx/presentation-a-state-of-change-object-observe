@@ -17,10 +17,6 @@
         <h3>Build maintainable, testable, and modular applications </h3>
         <h2>faster</h2>
       </section>
-      <section data-bespoke-backdrop="backdrop backdrop--misko" class="misko undefined">
-        <h3>&ldquo;There's a lot of Web frameworks out there. What's unique about Angular is ... we have dependency injection, which is very unique. Nobody else has that. The thing that really hits it home is that we have directives. Rather than writing everything inside of JavaScript and then having a bunch of templates to generate the UI, you write a lot of it in HTML and HTML drives the assembly of the application. It's kind of the reverse thing. It's very unique&rdquo;</h3>
-        <h4>-Misko Hevery, Angular creator</h4>
-      </section>
       <section data-bespoke-backdrop="backdrop backdrop--jquery" class="jquery undefined">
         <h3>Why do we need frameworks?</h3>
         <pre class="language-javascript"><code>var $accordionContainer;
@@ -56,6 +52,7 @@ $accordionContainer.accordion();
       </section>
       <section> 
         <iframe src="http://todomvc.com/" style="width:100%; height:100%;"></iframe>
+        <p>http://todomvc.com</p>
       </section>
       <!--Controlling complexity is the essence of computer programming. - Brian Kernighan-->
       <section>   
@@ -96,8 +93,14 @@ $accordionContainer.accordion();
           <p style="text-align:left">ref:<a href="http://stackoverflow.com/research/developer-survey-2015?utm_medium=social&amp;utm_campaign=stack-overflow-survey&amp;utm_source=facebook.com#tech-lang">http://stackoverflow.com/research/developer-survey-2015?utm_medium=social&utm_campaign=stack-overflow-survey&utm_source=facebook.com#tech-lang</a></p>
         </div>
       </section>
-      <section>
-        <h2>and of course we're using it at the lab, yardmap, all about bird biology</h2>
+      <section> 
+        <h2>yardmap.org</h2>
+        <iframe src="http://app.yardmap.org" style="width:100%; height:100%;"></iframe>
+      </section>
+      <section> 
+        <h2>all about bird biology</h2>
+        <iframe src="http://biology.allaboutbirds.org/features/fancymales/fancy-males" style="width:100%; height:100%;"></iframe>
+        <p><a href="http://biology.allaboutbirds.org/features/fancymales/fancy-males">http://biology.allaboutbirds.org/features/fancymales/fancy-males</a></p>
       </section>
       <section><img src="images/todomvc.svg" height="35" style="position:absolute;">
         <iframe src="http://cm325.github.io/todomvc/examples/angularjs-perf/#/" style="width:100%; height:100%;"></iframe>
@@ -105,7 +108,7 @@ $accordionContainer.accordion();
       <section>
         <h1>Learning Angular</h1>
         <h3>Controllers, $scope, partials/templates</h3>
-        <h3>Services, Factories, Providers</h3>
+        <h3>Services, Factories, $resource</h3>
         <h3>Directives, Transclusion</h3>
         <h3>Dependency Injection</h3>
         <h3>Modules</h3>
@@ -127,300 +130,103 @@ $accordionContainer.accordion();
       <section data-bespoke-backdrop="backdrop backdrop--whoa" class="whoa undefined">
         <h2>WHOA</h2>
       </section>
+      <section data-bespoke-backdrop="backdrop backdrop--nintieswebsite" class="nintieswebsite undefined">
+        <p class="marquee"><span style="font-size:2.5em;">Repeat after me. Unobstrusive Javascript. Unobstrusive Javascript  </span></p>
+      </section>
       <section> 
         <iframe src="https://angularjs.org/#the-basics" style="width:100%; height:100%;"></iframe>
       </section>
       <section data-bespoke-backdrop="backdrop backdrop--angularjs" class="angularjs undefined">
-        <h2>Dirty checking</h2>
-        <h3>&mdash; a.k.a. $scope.$digest( ) &mdash;</h3>
+        <pre class="language-javascript"><code>todomvc.controller('TodoCtrl', 
+    function TodoCtrl($scope, $location, $filter, todoStorage) {
+    var todos = $scope.todos = todoStorage.get(); 
+    
+    $scope.newTodo = '';
+    $scope.remainingCount = 
+    $filter('filter')(todos, {completed: false}).length;
+    </code></pre>
       </section>
       <section>
-        <h2 class="single-words">No idea it changed</h2>
+         
+        <script src="https://gist.github.com/cm325/00dc35123f98968a210c.js"></script>
       </section>
       <section>
-      </section>
-      <h1>Solutions?  </h1>
-      <h2>Cover the common solutions? backbone, emberjs, react?</h2>
-      <h2>Mostly all trying to do the same thing. </h2>
-      <h2>Cut down on code with a framework to handle common tasks</h2>
-      <section data-bespoke-backdrop="backdrop backdrop--backbonejs" class="backbonejs undefined">
-        <pre class="language-javascript"><code>var model = new Model();
-
-model.set('foo', 'bar');
-model.get('foo');
-</code></pre>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--jquery" class="jquery undefined">
-        <pre class="language-javascript"><code>var model = new Model();
-
-model.set('foo', 'bar');
-model.get('foo');
-</code></pre>
-      </section>
-      <!--angular quote-->
-      <section>
-        <h3 style="width:490px">&ldquo;Angular models are plain old JavaScript objects. This makes your code easy to test, maintain, reuse, and again free from boilerplate.&rdquo;</h3>
-      </section>
-      <section>
-        <h1>Object.observe</h1>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// Add a property
-o.foo = 'bar';
-
-// Change record:
-[{ name: "foo",
-   object: o,
-   type: "add" }]</code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// Update a property:
-o.foo = 123;
-
-// Change record
-[{ name: "foo",
-   object: o,
-   oldValue: "bar",
-   type: "update" }]</code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>delete o.foo;
-
-// Change record:
-[{ name: "foo",
-   object: o,
-   oldValue: 123,
-   type: "delete" }]
-   </code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>var a = [];
-
-Array.observe(a, function(changes) {
-  console.log(changes);
-});</code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>a.push(1);
-
-// Change record:
-[{ addedCount: 1,
-   index: 0,
-   object: a,
-   removed: [],
-   type: "splice" }]
-   </code></pre>
-      </section>
-      <section>
-        <h2 class="single-words">Synthetic change events</h2>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>Object.getNotifier(o).notify({
-  type: 'update',
-  name: 'foo',
-  oldValue: 'bar'
+        <pre class="small language-javascript"><code>todomvc.factory('todoStorage', function () {
+  var STORAGE_ID = 'todos-angularjs-perf';
+  
+  return {
+    get: function () {
+      return JSON.parse(localStorage.getItem(STORAGE_ID)
+                           || '[]');
+    },
+    put: function (todos) {
+      localStorage.setItem(STORAGE_ID, 
+                              JSON.stringify(todos));
+    },
+    clear: function(){
+      localStorage.setItem(STORAGE_ID, []);
+    }
+  };
 });
 </code></pre>
       </section>
       <section>
-        <h2>Binding<br><br><br>plain old data<br><br><br>to the<br><br><br>DOM</h2>
+        <pre class="bullet small language-javascript"><code>todomvc.factory('todoStorage', function () {
+  return $resource('http://www.myapp.com/api/todos/:todoId'); 
+});</code></pre>
+        <pre class="bullet language-javascript"><code>//GET request to http://www.myapp.com/api/todos/123
+var todo = todoStorage.get({todoId:123}); </code></pre>
+        <pre class="bullet language-javascript"><code>//POST request to http://www.myapp.com/api/todos/123
+todoStorage.save({todoId:123}, todo); 
+</code></pre>
       </section>
-      <section data-bespoke-backdrop="backdrop backdrop--chrome" class="chrome undefined">
-        <h3>Available now in</h3>
-        <h2>Chrome Stable</h2>
+      <section data-bespoke-backdrop="backdrop backdrop--misko" class="misko undefined">
+        <h3>&ldquo;What's unique about Angular is ... we have dependency injection, which is very unique. Nobody else has that. <br/> But, the thing that really hits it home is that we have directives. Rather than writing everything inside of JavaScript and then having a bunch of templates to generate the UI, you write a lot of it in HTML and HTML drives the assembly of the application. It's kind of the reverse thing. It's very unique&rdquo;</h3>
+        <h4>-Misko Hevery, Angular creator</h4>
       </section>
       <section>
-        <h2 class="single-words">Seems uncontroversial enough</h2>
+        <pre style="line-height:10px;" class="bullet small"><span style="color: #f92672">&lt;ng</span><span style="color: #a6e22e">-pluralize</span> <span style="color: #a6e22e">count=</span><span style="color: #e6db74">&quot;remainingCount&quot;</span>
+<br/>
+<span style="color: #a6e22e">when=</span><span style="color: #e6db74">&quot;{ one: &#39;item left&#39;, other: &#39;items left&#39; }&quot;</span><span style="color: #f92672">&gt;</span>
+<br/>
+<span style="color: #960050; background-color: #1e0010">&lt;</span>/ng-pluralize&gt;</pre>
+        <pre style="color:white;" class="bullet small"><span>becomes</span>
+<br/>
+<span style="color: #f92672">&lt;span&gt;</span>items left<span style="color: #f92672">&lt;/span&gt;</span></pre>
+      </section>
+      <section>
+        <pre class="small language-javascript"><code>angular.module('todomvc', [])
+ .directive('todoList', function(){
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: { title:'@' },
+      template: "/partials/todo-list-partial.html"
+      controller: "TodoCtrl"
+    };
+})
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--neverending" class="neverending undefined">
+        <p style="margin-top:-380px;color:white" class="bullet">&lt;todo-list&gt;My Todo List&lt;/todo-list&gt;</p><br/>
+        <h2 style="color:white;" class="bullet">'DIRECTIVES'&#33;</h2>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--still backdrop--crashtest" class="still crashtest undefined">
+        <h2 style="color:white;">You Said Testing</h2>
       </section>
       <section data-bespoke-backdrop="backdrop backdrop--still backdrop--lightning" class="still lightning undefined">
-        <h2>Dissent</h2>
+        <h2>Angular 2.0</h2>
         <h3>&mdash; is &mdash;</h3>
-        <h2>brewing</h2>
+        <h2>coming</h2>
       </section>
-      <section>
-        <h2>Mutability</h2>
-        <h3>&mdash; vs. &mdash;</h3>
-        <h2>Immutability</h2>
-      </section>
-      <section>
-        <h1>Immutable<br>values</h1>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// 'hello' is immutable
-var str = 'hello';
-
-str.replace('hello', 'goodbye');
-str.slice(2);
-str.concat(' there');
-
-str; // still equals 'hello'
-</code></pre>
-      </section>
-      <section>
-        <h2>Simple comparisons</h2>
-        <pre class="language-javascript"><code>'hello' === 'hello';
-</code></pre>
-      </section>
-      <section>
-        <h3>We&rsquo;ve been treating</h3>
-        <h2>arrays</h2>
-        <h3>&mdash; like they&rsquo;re &mdash;</h3>
-        <h2>immutable</h2>
-      </section>
-      <section>
-        <pre class="small language-javascript"><code>// Old and scary:
-
-var nums = [1,2,3,4,5];
-
-for (var i = 0; i &lt; nums.length; i++) {
-  // Cube all numbers
-  nums[i] = nums[i] * nums[i] * nums[i];
-  
-  // Remove uneven items
-  if (nums[i] % 2 !== 0) {
-    nums.splice(i, 1);
-    i--;
-  }
-}
-</code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// New and simple:
-
-var nums = [1,2,3,4,5]
-  .map(x => x * x * x)
-  .filter(x => x % 2 == 0);
-  </code></pre>
-      </section>
-      <section>
-        <h2>Every map, filter</h2>
-        <h3>&mdash; results in a &mdash;</h3>
-        <h2>New array</h2>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// Unfortunately,
-// not actually immutable :(
-
-nums.push(123);
-</code></pre>
-      </section>
-      <section>
-        <h2>No simple comparisons</h2>
-        <pre class="language-javascript"><code>assert([1,2,3] !== [1,2,3]);
-</code></pre>
-      </section>
-      <section>
-        <h2>Cleaner code</h2>
-        <h3>&mdash; with &mdash;</h3>
-        <h2>Fewer bugs</h2>
-      </section>
-      <section>
-        <h2 class="single-words">Why are objects different?</h2>
-      </section>
-      <section>
-        <h2>What if every change</h2>
-        <h3>&mdash; resulted in a &mdash;</h3>
-        <h2>new object?</h2>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--swannodette" class="swannodette undefined">
-        <h4>David Nolen</h4><br>
-        <h1>Mori</h1><br>
-        <h4>Via ClojureScript</h4>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// Create:
-var map1 = mori.hash_map('foo', 1);
-
-// Update:
-var map2 = mori.conj(m, mori.vector('bar', 2));
-
-// Returns a new hash map:
-{ 'foo': 1, 'bar': 2 }
-</code></pre>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--leebyron" class="leebyron undefined">
-        <h4>Lee Byron</h4><br>
-        <h1>Immutable-js</h1><br>
-        <h4>Facebook</h4>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>// Create:
-var map1 = Immutable.Map({ foo: 1 });
-
-// Update:
-var map2 = map1.merge({ bar: 2 });
-
-// Returns a new map:
-{ "foo": 1, "bar": 2 }
-</code></pre>
-      </section>
-      <section>
-        <h2>Simple comparisons!</h2>
-        <pre class="language-javascript"><code>var map1 = Immutable.Map({ foo: 'bar' });
-var map2 = map1.merge({ foo: 'bar' });
-
-assert(map1 === map2); // :D !!!
-</code></pre>
-      </section>
-      <section>
-        <pre class="language-javascript"><code>var map1 = Immutable.Map({ foo: 'bar' });
-var map2 = Immutable.Map({ foo: 'bar' });
-
-assert(Immutable.is(map1, map2));
-</code></pre>
-      </section>
-      <section>
-        <h2>Is this redundant</h2>
-        <h3>&mdash; when we have &mdash;</h3>
-        <h2>Stateful DOM?</h2>
-      </section>
-      <section>
-        <h1>React</h1>
-      </section>
-      <section>
-        <h3 style="width:440px">&ldquo;Simply express how your app should look at any given point in time, and React will automatically manage all UI updates&rdquo;</h3>
-      </section>
-      <section>
-        <h2 class="single-words">Essentially stateless DOM</h2>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--mattesch" class="mattesch undefined">
-        <h4>Matt Esch</h4><br>
-        <h1>virtual-dom</h1><br>
-        <h4>Inspired by React</h4>
-      </section>
-      <section>
-        <h2 class="single-words">What&rsquo;s the big deal?</h2>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--swannodette" class="swannodette undefined">
-        <h4>David Nolen</h4><br>
-        <h1>Om</h1><br>
-        <h4>React + ClojureScript</h4>
-      </section>
-      <section>
-        <h2>Entire UI state</h2>
-        <h3>&mdash; in a &mdash;</h3>
-        <h2>Single, immutable object</h2>
-      </section>
-      <section>
-        <h2>&ldquo;The future</h2>
-        <h3>&mdash; of &mdash;</h3>
-        <h2>JavaScript MVCs&rdquo;</h2>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--yellow" class="yellow undefined">
-        <h1>ES7</h1>
-      </section>
-      <section data-bespoke-backdrop="backdrop backdrop--still backdrop--poisonapple" class="still poisonapple undefined">
-        <h3>&mdash; Is Object.observe &mdash;</h3>
-        <h2>What we want</h2>
-        <h3>&mdash; rather than &mdash;</h3>
-        <h2>What we need?</h2>
-      </section>
-      <section><a href="https://cm325.github.io/todomvc/examples/anuglarjs-perf/">
-          <h2>References</h2></a>
-      </section>
+      <!--+slide-->
+      <!--  h2 References-->
+      <!--    a(href='https://cm325.github.io/todomvc/examples/anuglarjs-perf/')//   h2 TodoMvc examples
+      -->
+      <!--    a(href="https://www.airpair.com/js/javascript-framework-comparison") mvc framework comparisons-->
       <section><img src="images/utah.jpg" class="avatar"><br>
-        <h2>Thanks</h2><a href="http://cm325.github.io/astateofchange" style="border:none">
-          <h3>bit.ly/astateofchange</h3></a>
+        <h2>Thanks</h2><a href="bit.ly/1GOCHz1" style="border:none">
+          <h3>bit.ly/1GOCHz1</h3></a>
       </section>
     </article>
     <script src="build/build.js"></script>
